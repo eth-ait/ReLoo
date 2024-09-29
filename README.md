@@ -1,6 +1,6 @@
 # ReLoo: Reconstructing Humans Dressed in Loose Garments from Monocular Video in the Wild
 
-## [Paper](https://arxiv.org/pdf/2409.15269) | [Video Youtube](https://youtu.be/MSSDDk5p270) | [Project Page](https://eth-ait.github.io/MultiPly/) | [MMM Dataset](https://multiply.ait.ethz.ch/)
+## [Paper](https://arxiv.org/pdf/2409.15269) | [Video Youtube](https://youtu.be/MSSDDk5p270) | [Project Page](https://moygcc.github.io/ReLoo/)
 
 Official Repository for ECCV 2024 paper [*ReLoo: Reconstructing Humans Dressed in Loose Garments from Monocular Video in the Wild*](). 
 <p align="center">
