@@ -1,0 +1,1 @@
+python test.py dataset=Dance_Game10 exp=in_the_wild model=model

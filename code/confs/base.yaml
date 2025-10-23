@@ -1,0 +1,13 @@
+hydra:
+    run:
+        dir: "../outputs/${run}/${exp}"
+
+defaults:
+  - model: model
+  - dataset: video
+  - _self_
+
+seed: 42
+project_name: "ReLoo"
+exp: ${dataset.train.type}
+run: ${dataset.metainfo.subject}

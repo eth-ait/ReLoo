@@ -1,0 +1,112 @@
+learning_rate : 5.0e-4
+sched_milestones : [200,500,800,1000]
+sched_factor : 0.5
+smpl_init: True
+is_continue: True
+with_bkgd: True
+
+body_network:
+    feature_vector_size: 256
+    d_in: 3
+    d_out: 1
+    dims: [ 256, 256, 256, 256, 256, 256, 256, 256]
+    init: 'geometry'
+    bias: 0.6
+    skip_in: [4]
+    weight_norm: True
+    embedder_mode: 'fourier'
+    multires: 6
+    cond: 'smpl'
+    scene_bounding_sphere: 3.0
+clothing_implicit_network:
+    feature_vector_size: 256
+    d_in: 3
+    d_out: 1
+    dims: [ 256, 256, 256, 256, 256, 256, 256, 256]
+    init: 'geometry'
+    bias: 0.6
+    skip_in: [4]
+    weight_norm: True
+    embedder_mode: 'fourier'
+    multires: 6
+    cond: 'smpl'
+    scene_bounding_sphere: 3.0
+rendering_network:
+    feature_vector_size: 256
+    mode: "pose"
+    d_in:  14
+    d_out: 3
+    dims: [ 256, 256, 256, 256]
+    weight_norm: True
+    multires_view: -1
+
+deformer:
+    skinning_network:
+        softmax_mode: hierarchical
+        feature_vector_size: 0
+        d_in:  3
+        d_out: 25
+        dims: [ 128, 128, 128, 128 ]
+        init: 'none'
+        skip_in: []
+        weight_norm: True
+        multires: -4
+        embedder_mode: 'fourier'
+        cond: 'none'
+        dim_semantic_encoding: 8
+virtual_bone:
+    feature_vector_size: 0
+    d_in: 3
+    d_out: 6
+    dims: [256, 256, 256, 256]
+    init: 'zero'
+    skip_in: []
+    weight_norm: True
+    multires: -1
+    cond: 'smpl+time'
+    num_vb: 160
+    epoch_start_vb: 50
+
+bg_implicit_network:
+    feature_vector_size: 512
+    d_in: 4
+    d_out: 1
+    dims: [ 256, 256, 256, 256, 256, 256, 256, 256 ]
+    init: 'none'
+    bias: 0.0
+    skip_in: [4]
+    weight_norm: False
+    embedder_mode: 'fourier'
+    multires: 10
+    cond: 'frame'
+    dim_frame_encoding: 32
+bg_rendering_network:
+    feature_vector_size: 512
+    mode: 'nerf_frame_encoding'
+    d_in: 3
+    d_out: 3
+    dims: [128]
+    weight_norm: False
+    multires_view: 4
+    dim_frame_encoding: 32
+density:
+    params_init: {beta: 0.01}
+    beta_min: 0.0001
+ray_sampler:
+    near: 0.0
+    N_samples: 64
+    N_samples_eval: 128
+    N_samples_extra: 32
+    eps: 0.1
+    beta_iters: 10
+    max_total_iters: 5
+    N_samples_inverse_sphere: 32
+    add_tiny: 1.0e-6
+loss:
+    eikonal_weight : 0.1
+    bce_weight: 5.0e-3
+    mask_weight: 0.1
+    seg_weight: 0.2
+
+    eps: 1.0e-6
+    milestone: 50
